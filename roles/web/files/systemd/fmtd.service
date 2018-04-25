@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI
+Documentation=http://http://uwsgi-docs.readthedocs.io/en/latest/
+After=network.target remote-fs.target nss-lookup.target
+ 
+[Service]
+WorkingDirectory=/var/flask
+ExecStart=/usr/bin/uwsgi --ini uwsgi.ini --uid www-data
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+ 
+[Install]
+WantedBy=multi-user.target

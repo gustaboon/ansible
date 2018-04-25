@@ -1,0 +1,4 @@
+---
+nginx-conf-file: all-in-one.conf
+flask-dir: /var/flask/
+

@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.page-title {
+    display: block;
+    text-align: center;
+}
+
+.instructions {
+    display: block;
+    text-align: center;
+    color: #FF0000;
+}
+
+.dice-bag {
+    display: flex;
+    justify-content: center;
+}
+
+.roll-em {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.box {
+    border: 1px solid #000000;
+    width: 5rem;
+    height: 5rem;
+    margin: 2rem;
+    display: flex;
+    font-size: 3rem;
+    color: #FF0000;
+    background-color: #eeeeee;
+    justify-content: center;
+    align-items: center;
+    transition: .5s all;
+}
+
+.box:hover {
+    background-color: orange;
+    box-shadow: 0 2px 10px rgba(9,0,0,.3);
+}
+

@@ -1,0 +1,8 @@
+---
+# file: roles/infradevapi/handlers/main.yml
+- name: restart_nginx
+  service: name=nginx state=restarted
+
+- name: restart_fmtd
+  service: name=fmtd state=restarted
+

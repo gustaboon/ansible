@@ -1,0 +1,10 @@
+---
+
+apt_packages:
+ - nmap
+ - tcpdump
+ - git
+
+pip_packages:
+ - requests
+ - futures

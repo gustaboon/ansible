@@ -1,0 +1,8 @@
+---
+- hosts: pi
+  become: True
+  become_method: sudo
+  roles:
+    - pi_basics
+    - ansible
+    - web    

@@ -1,0 +1,8 @@
+---
+- hosts: pi
+  become: True
+  become_method: sudo
+  vars:
+    skip_packages: True
+  roles:
+    - web    

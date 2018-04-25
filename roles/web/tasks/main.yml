@@ -1,0 +1,68 @@
+---
+- name: Install packages via APT
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items: "{{ apt_packages }}"
+  when: not skip_packages
+
+- name: Install package via PIP
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ pip_packages }}"
+  when: not skip_packages
+
+- name: Clone down all repos from GitHub
+  git:
+    repo: "{{ item.url }}"
+    dest: "{{ item.path }}"
+  with_items: "{{ github_repos }}"
+
+- name: Create Flask directort if doesn't exist
+  file:
+      path: "{{ flask-dir }}"
+    state: directory
+    owner: www-data
+    group: www-data
+
+- name: Copy Flask files into "{{ flask-dir }}"
+  copy:
+    src: flask/
+    dest: "{{ flask-dir }}"
+    owner: www-data
+    group: www-data
+  notify: restart_fmtd
+
+- name: Copy systemd service definition to /lib/systemd/system
+  copy:
+    src: systemd/
+    dest: /lib/systemd/system/
+
+- name: Enable fmtd service to start on boot, and start service
+  service:
+    name: fmtd
+    state: started
+    enabled: yes
+
+- name: Delete Default nginx site
+  file:
+    path: /etc/nginx/{{ item }}
+    state: absent
+  with_items:
+  - "sites-enabled/default"
+  - "sites-available/default"
+
+- name: Copy Nginx site.conf files to /etc/nginx/sites-available/
+  copy:
+    src: nginx/
+    dest: /etc/nginx/sites-available/
+  notify: restart_nginx
+  
+- name: Create Symlink for available site
+  file: 
+  src: /etc/nginx/sites-available/{{ nginx-conf-file }}
+  dest: /etc/nginx/sites-enabled/{{ nginx-conf-file }}
+    state: link
+  notify: restart_nginx

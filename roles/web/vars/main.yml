@@ -1,0 +1,17 @@
+---
+
+apt_packages:
+  - nginx
+  - python-dev
+  - libpcre3
+  - libpcre3-dev
+
+pip_packages:
+  - uWSGI
+  - Flask
+
+github_repos:
+  rolldembones:
+    url: https://github.com/gustaboon/rolldembones.git
+    path: /var/www/gustaboon/rolldembones
+

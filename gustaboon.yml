@@ -1,0 +1,13 @@
+---
+- hosts: localhost #pi
+  become: True
+  become_method: sudo
+  tasks:
+
+  - name: Clone Gustaboon from GitHub
+    git:
+      repo: git@github.com:somesang/gustaboon.git
+      dest: /var/www/gustaboon
+      update: yes
+      accept_hostkey: yes
+
